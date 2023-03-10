@@ -1,0 +1,144 @@
+<html>
+<head>
+<title>GsPyLibrary.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #c22f2f;}
+.s3 { color: #cc7832;}
+.s4 { color: #e3e327; font-weight: bold;}
+.s5 { color: #6897bb;}
+.s6 { color: #51726a; font-style: italic;}
+.s7 { color: #69fc02;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+GsPyLibrary.py</font>
+</center></td></tr></table>
+<pre><span class="s0"># coding: utf-8</span>
+<span class="s0"># -------------------------------------------------------------------------------</span>
+<span class="s0"># Name:        Moduł GsPyLibrary</span>
+<span class="s0"># Purpose:     Moduł z różnymi funkcjami i klasami</span>
+<span class="s0">#</span>
+<span class="s0"># Author:      Grzegorz Sołtysik</span>
+<span class="s0">#</span>
+<span class="s0"># Created:     08.02.2023</span>
+<span class="s0"># Copyright:   (c) Grzegorz Sołtysik 2021 v1.0.625</span>
+<span class="s0"># Licence:     &lt;GNU&gt;</span>
+<span class="s0"># -------------------------------------------------------------------------------</span>
+<span class="s2">import </span><span class="s1">configparser</span>
+<span class="s2">import </span><span class="s1">locale</span>
+<span class="s2">import </span><span class="s1">os</span>
+<span class="s2">from </span><span class="s1">datetime </span><span class="s2">import </span><span class="s1">datetime</span>
+<span class="s2">from </span><span class="s1">enum </span><span class="s2">import </span><span class="s1">IntEnum</span><span class="s3">, </span><span class="s1">auto</span>
+<span class="s2">from </span><span class="s1">pathlib </span><span class="s2">import </span><span class="s1">Path</span>
+
+<span class="s0"># Klasa enumeracji dla typu archiwizatora</span>
+<span class="s2">class </span><span class="s1">TypeArch</span><span class="s4">(</span><span class="s1">IntEnum</span><span class="s4">)</span><span class="s1">:</span>
+    <span class="s1">en7Zip = </span><span class="s5">1000</span>
+    <span class="s1">enRar = auto</span><span class="s4">()</span>
+
+<span class="s2">def </span><span class="s1">nowdatetime</span><span class="s4">()</span><span class="s1">:</span>
+    <span class="s6">&quot;&quot;&quot; 
+    OPIS: Funkcja odczytuje i formatuje datę i czas 
+    :return: strdatetime: str - odczytana i zformatowana data i czas 
+    &quot;&quot;&quot;</span>
+    <span class="s1">loc = locale.getlocale</span><span class="s4">()  </span><span class="s0"># Odczyt bierzących ustawień</span>
+    <span class="s1">locale.setlocale</span><span class="s4">(</span><span class="s1">locale.LC_ALL</span><span class="s3">, </span><span class="s7">&quot;Polish_Poland.utf8&quot;</span><span class="s4">)</span>
+    <span class="s1">nowdate = datetime.now</span><span class="s4">()</span>
+    <span class="s1">strdatetime: str = </span><span class="s7">&quot;_&quot; </span><span class="s1">+ nowdate.strftime</span><span class="s4">(</span><span class="s7">&quot;%d-%B-%Y_%H-%M-%S&quot;</span><span class="s4">)</span>
+    <span class="s1">locale.setlocale</span><span class="s4">(</span><span class="s1">locale.LC_ALL</span><span class="s3">, </span><span class="s1">loc</span><span class="s4">)  </span><span class="s0"># Powrót do pierwotnych ustawień lokalizacji</span>
+    <span class="s2">return </span><span class="s1">strdatetime</span>
+
+<span class="s2">def </span><span class="s1">getvalueini</span><span class="s4">(</span><span class="s1">pathini: str</span><span class="s3">, </span><span class="s1">sectionini: str</span><span class="s3">, </span><span class="s1">valueini: str</span><span class="s3">, </span><span class="s1">defaultvalue: str</span><span class="s4">)</span><span class="s1">:</span>
+    <span class="s6">&quot;&quot;&quot; 
+    OPIS: Funkcja odczytuje wartość w pliku &quot;pathini&quot;, sekcji &quot;sectionini&quot;, dla klucza &quot;valueini&quot; 
+          lub odczytuje wartość domyślną &quot;defaultvalue&quot; w wypadku braku jakiegoś elementu 
+ 
+    :param pathini:str - Ścieżka dostępu do pliku konfiguracyjnego .ini 
+    :param sectionini:str - Nazwa sekcji w pliku ini 
+    :param valueini:str - Wartość dla sekcji &quot;sectionini&quot; w pliku ini 
+    :param defaultvalue:str - Domyślna wartość dla valueini 
+    :return: strret 
+    &quot;&quot;&quot;</span>
+    <span class="s2">if </span><span class="s1">os.path.exists</span><span class="s4">(</span><span class="s1">pathini</span><span class="s4">) </span><span class="s2">is False</span><span class="s1">:</span>
+        <span class="s1">strret: str = </span><span class="s7">&quot;&quot;</span>
+    <span class="s2">else</span><span class="s1">:</span>
+        <span class="s1">config = configparser.ConfigParser</span><span class="s4">()</span>
+        <span class="s1">config.read</span><span class="s4">(</span><span class="s1">pathini</span><span class="s4">)</span>
+
+        <span class="s1">strret = config.get</span><span class="s4">(</span><span class="s1">sectionini</span><span class="s3">, </span><span class="s1">valueini</span><span class="s3">, </span><span class="s1">fallback=defaultvalue</span><span class="s4">)</span>
+    <span class="s2">return </span><span class="s1">strret</span>
+
+<span class="s2">def </span><span class="s1">archiweproject</span><span class="s4">(</span><span class="s1">pathsourcedir: str</span><span class="s3">, </span><span class="s1">typearch: TypeArch = TypeArch.en7Zip</span><span class="s4">)</span><span class="s1">:</span>
+    <span class="s6">&quot;&quot;&quot; 
+    OPIS: Funkcja archiwizuje projekt z ścieżki dostępu &quot;pathsourcedir&quot; 
+    :param pathsourcedir: str - Ścieżka dostępu do głównego katalogu projektu 
+    :param typearch:TypeArch - Domyślny typ archiwizacji 
+    :return: pass 
+    &quot;&quot;&quot;</span>
+
+    <span class="s1">arch7zip: str = </span><span class="s7">&quot;7z.exe&quot;  </span><span class="s0"># Nazwa archiwizatora 7zip</span>
+    <span class="s1">arch7zipdll: str = </span><span class="s7">&quot;7z.dll&quot;  </span><span class="s0"># Nazwa biblioteki potrzebnej dla archiwizatora 7z</span>
+    <span class="s1">mypythonfileconfig: str = </span><span class="s7">&quot;myconfigpython.ini&quot;  </span><span class="s0"># Nazwa pliku konfiguracyjnego ze ścieżką dostępu do domyślnego katalogu na archiwa</span>
+    <span class="s1">defaultpatharch: str = </span><span class="s7">&quot;F:</span><span class="s3">\\</span><span class="s7">DevelopGS</span><span class="s3">\\</span><span class="s7">Archiwa&quot;  </span><span class="s0"># Domyślna ścieżka dostępu do głównego katalogu archiwum</span>
+    <span class="s1">archivedir: str = getvalueini</span><span class="s4">(</span><span class="s1">mypythonfileconfig</span><span class="s3">, </span><span class="s7">&quot;main&quot;</span><span class="s3">, </span><span class="s7">&quot;defprojectarchive&quot;</span><span class="s3">, </span><span class="s1">defaultpatharch</span><span class="s4">)</span>
+
+    <span class="s1">syntax7zip: str = </span><span class="s7">&quot;{} a -t7z {} {}&quot;  </span><span class="s0"># Składnia wywoływania archiwizatora 7zip</span>
+    <span class="s1">syntaxrar: str = </span><span class="s7">&quot;{} a -s -r -m5 -ma5 {} {}&quot;  </span><span class="s0"># Składnia wywoływania archiwizatora rar</span>
+
+    <span class="s0"># Określenie ściezki dostępu do archiwizatora 7zip</span>
+    <span class="s1">archiveexe7zip: str = getvalueini</span><span class="s4">(</span><span class="s1">mypythonfileconfig</span><span class="s3">, </span><span class="s7">&quot;main&quot;</span><span class="s3">, </span><span class="s7">&quot;patharch7zip&quot;</span><span class="s3">, </span><span class="s7">&quot;7z.exe&quot;</span><span class="s4">)</span>
+    <span class="s0"># Zmiana rozszerzenia z .exe na .dll dla archiwizatora 7zip</span>
+    <span class="s1">archivedll7zip: str = archiveexe7zip.replace</span><span class="s4">(</span><span class="s1">arch7zip</span><span class="s3">, </span><span class="s1">arch7zipdll</span><span class="s4">)</span>
+
+    <span class="s0"># Określenie ściezki dostępu do archiwizatora rar</span>
+    <span class="s1">archiveexerar: str = getvalueini</span><span class="s4">(</span><span class="s1">mypythonfileconfig</span><span class="s3">, </span><span class="s7">&quot;main&quot;</span><span class="s3">, </span><span class="s7">&quot;patharchRar&quot;</span><span class="s3">, </span><span class="s7">&quot;rar.exe&quot;</span><span class="s4">)</span>
+
+    <span class="s0"># Sprawdzanie czy istnieje archiwizer w bierzącym katalogu</span>
+    <span class="s2">if </span><span class="s1">os.path.exists</span><span class="s4">(</span><span class="s1">archiveexe7zip</span><span class="s4">) </span><span class="s2">and </span><span class="s1">os.path.exists</span><span class="s4">(</span><span class="s1">archivedll7zip</span><span class="s4">)</span><span class="s1">:</span>
+        <span class="s2">pass</span>
+    <span class="s2">else</span><span class="s1">:</span>
+        <span class="s1">print</span><span class="s4">(</span><span class="s7">&quot;Archiwizator 7z.exe nie istnieje w bierzącym katalogu!&quot;</span><span class="s4">)</span>
+        <span class="s1">exit</span><span class="s4">()</span>
+    <span class="s0"># Stworzenie dodatku do nazwy archiwum z bierzącą data i czasem</span>
+    <span class="s1">fulldatetime: str = nowdatetime</span><span class="s4">()</span>
+    <span class="s1">about: str = </span><span class="s7">&quot;archiweproject v0.8.264 © Grzegorz Sołtysik Oświęcim 14-09-2021&quot;</span>
+    <span class="s1">print</span><span class="s4">(</span><span class="s7">&quot;{}&quot;</span><span class="s1">.format</span><span class="s4">(</span><span class="s1">about</span><span class="s4">))</span>
+    <span class="s0"># Wyciągnięcie ze ścieżki dostępu do projektu, samej nazwy projektu</span>
+    <span class="s1">nameproject: str = os.path.basename</span><span class="s4">(</span><span class="s1">pathsourcedir</span><span class="s4">)</span>
+    <span class="s0"># Przejście powyżej &quot;pathsourcedir&quot; do katalogu z projektami</span>
+    <span class="s1">directoryprojects: str = os.path.dirname</span><span class="s4">(</span><span class="s1">pathsourcedir</span><span class="s4">)</span>
+    <span class="s0"># Aktualnym katalogiem katalog z projektami. Aktalnym katalogiem MUSI być katalog z projektami, gdyż podczas</span>
+    <span class="s0"># uruchamiania właściwej archiwizacji ścieżka do katalogu żródłowego, jest ścieżką względną (os.getcwd() + projectname)</span>
+    <span class="s1">os.chdir</span><span class="s4">(</span><span class="s1">directoryprojects</span><span class="s4">)</span>
+    <span class="s1">nameprojectarchiwe: str = os.path.join</span><span class="s4">(</span><span class="s1">archivedir</span><span class="s3">, </span><span class="s1">nameproject</span><span class="s4">)  </span><span class="s0"># Ścieżka do nowego archiwum projektu</span>
+    <span class="s1">Path</span><span class="s4">(</span><span class="s1">nameprojectarchiwe</span><span class="s4">)</span><span class="s1">.mkdir</span><span class="s4">(</span><span class="s1">parents=</span><span class="s2">True</span><span class="s3">, </span><span class="s1">exist_ok=</span><span class="s2">True</span><span class="s4">)  </span><span class="s0"># Sprawdzanie czy istnieje katalog na archiwum, jeśli nie to zostanie stworzony (Python ≥ 3.5)</span>
+
+    <span class="s0"># tworzenie pełnej ściezki dostępu do archiwum (wraz z modyfikacją nazwy archiwum przez dodanie daty i czasu)</span>
+    <span class="s1">nameprojectarchiwefull7zip: str = os.path.join</span><span class="s4">(</span><span class="s1">nameprojectarchiwe</span><span class="s3">, </span><span class="s1">nameproject</span><span class="s4">)  </span><span class="s0"># Archiwum 7zip</span>
+    <span class="s1">nameprojectarchiwefullrar: str = nameprojectarchiwefull7zip  </span><span class="s0"># Archiwum rar</span>
+    <span class="s1">nameprojectarchiwefullrar += fulldatetime  </span><span class="s0"># Archiwum rar</span>
+    <span class="s1">nameprojectarchiwefull7zip += fulldatetime + </span><span class="s7">&quot;.7z&quot;  </span><span class="s0"># Archiwum 7zip</span>
+
+    <span class="s1">createarchive7z: str = syntax7zip.format</span><span class="s4">(</span><span class="s1">archiveexe7zip</span><span class="s3">, </span><span class="s1">nameprojectarchiwefull7zip</span><span class="s3">, </span><span class="s1">nameproject</span><span class="s4">)</span>
+    <span class="s1">createarchiverar: str = syntaxrar.format</span><span class="s4">(</span><span class="s1">archiveexerar</span><span class="s3">, </span><span class="s1">nameprojectarchiwefullrar</span><span class="s3">, </span><span class="s1">nameproject</span><span class="s4">)</span>
+
+    <span class="s0"># ---- Wykonywanie poleceń dosa ----</span>
+    <span class="s0"># Właściwa archiwizacja</span>
+    <span class="s2">if </span><span class="s1">typearch == TypeArch.en7Zip:</span>
+        <span class="s1">os.system</span><span class="s4">(</span><span class="s1">createarchive7z</span><span class="s4">)</span>
+    <span class="s2">elif </span><span class="s1">typearch == TypeArch.enRar:</span>
+        <span class="s1">os.system</span><span class="s4">(</span><span class="s1">createarchiverar</span><span class="s4">)</span>
+
+    <span class="s1">os.chdir</span><span class="s4">(</span><span class="s1">nameprojectarchiwe</span><span class="s4">)  </span><span class="s0"># Aktualnym katalogiem jest katalog anarchism</span>
+    <span class="s1">os.system</span><span class="s4">(</span><span class="s7">&quot;cls&quot;</span><span class="s4">)  </span><span class="s0"># Wyczyszczenie konsoli</span>
+    <span class="s1">os.system</span><span class="s4">(</span><span class="s7">&quot;dir&quot;</span><span class="s4">)</span>
+    <span class="s0"># os.system(&quot;pause&quot;) # Czekanie na naciśnięcie dowolnego klawisza by zamknąć konsole</span>
+</pre>
+</body>
+</html>
