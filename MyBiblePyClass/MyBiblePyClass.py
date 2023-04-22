@@ -1,44 +1,57 @@
-import configparser
-import locale
+# import configparser
+# import locale
+import fileinput
 import os
-from datetime import datetime
-from enum import IntEnum, auto
-from pathlib import Path
+# from datetime import datetime
+# from enum import IntEnum, auto
+# from pathlib import Path
+
+MAX_BOOKS: int = 72 #  Maksymalna ilość ksiąg
+class ItemTrans:
+    def __init__(self, _pathtr: str):
+        self.namepathtr = _pathtr
+        self.books = [] # Tablica ksiąg
+        #  Odczyt nazwy tłumaczenia z pierwszej linijki pliku
+        file = open(self.namepathtr, "rt", encoding="utf-8")
+        self.infotr = file.readline().strip("\n")  # opis
+        file.close()
 
 class MyBiblePyClass:
     # Konstruktor
-    def __init__(self, _pathTrDir:str):
+    def __init__(self, _pathtrdir: str):
         # Private
-        self.__version:str = "0.1"
+        self.__version: str = "0.1"
         # Public
-        self.pathTrDir:str = _pathTrDir
-        self.filenames = [] # Tablica
+        self.pathtrdir: str = _pathtrdir
+        self.filenames = []  # Tablica
+        self.itemstr: ItemTrans = []
 
-        for myfilenames in os.listdir(self.pathTrDir):
-            if myfilenames.endswith(".pltmb"): # filtr
-                myfilenames = os.path.join(self.pathTrDir, myfilenames)
+        for myfilenames in os.listdir(self.pathtrdir):
+            if myfilenames.endswith(".pltmb"):  # filtr
+                myfilenames = os.path.join(self.pathtrdir, myfilenames)
                 self.filenames.append(myfilenames)
+                self.itemstr.append(ItemTrans(myfilenames))  #  Dodawanie do tablicy objektów tłumaczenia
 
-    def readText(self, _iTrans:int, _iBook:int, _iChapt:int, _iVers:int):
-        if _iTrans >= len(self.filenames): return # Jeśli przekroczono numer tłumaczenia
+    def readtext(self, _itrans: int, _ibook: int, _ichapt: int, _ivers: int):
+        if _itrans >= len(self.filenames):
+            return  # Jeśli przekroczono numer tłumaczenia
 
-        file = open(self.filenames[_iTrans], "rt", encoding="utf-8")
-        file.readline().strip("\n") # opis
+        mytranslate: str = self.itemstr[_itrans].namepathtr
+        try:
+            file = open(mytranslate, "rt", encoding="utf-8")
+            file.readline().strip("\n")  # opis
 
-        for strText in  file: # range(31168):
-            strText = strText.rstrip("\n")
-            if strText == "":
-                break
-            rFullAdress = strText[0:9]
-            iBook = int(rFullAdress[0:3])
-            iChapt = int(rFullAdress[3:6])
-            iVers = int(rFullAdress[6:9])
-            if iBook == _iBook and iChapt == _iChapt and iVers == _iVers:
-                break
+            for strtext in file:  # range(31168):
+                strtext = strtext.rstrip("\n")
+                if strtext == "":
+                    break
+                rfulladress = strtext[0:9]
+                ibook = int(rfulladress[0:3])
+                ichapt = int(rfulladress[3:6])
+                ivers = int(rfulladress[6:9])
+                if ibook == _ibook and ichapt == _ichapt and ivers == _ivers:
+                    break
+        finally:
+            file.close()
 
-        file.close()
-        return strText[10:]
-
-
-
-
+        return strtext[10:]
