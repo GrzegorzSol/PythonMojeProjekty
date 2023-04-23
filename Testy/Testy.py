@@ -1,14 +1,22 @@
-import configparser
-import locale
-import os
-from datetime import datetime
-from enum import IntEnum, auto
-from pathlib import Path
+# import configparser
+# import locale
+# import os
+# from datetime import datetime
+# from enum import IntEnum, auto
+# from pathlib import Path
 
-PATHFILE = "F:\\DevelopGS\\Dane dla MojaBiblia\\Data\\ReadingPlan\\Chronologiczny_Test.rpf"
+books = []
+licz = 0
 
-file = open(PATHFILE,  "rt", encoding="utf-8")
-line = file.readline()
-while line:
-    line = file.readline().strip("\n")
-    print("{} - {}".format(file.tell(), line))
+for y in range(8):
+    books.append([])  # [] - Księgi, [][] - linie tekstu ksiąg
+
+    for x in range(8):
+        licz = licz + 1
+        books[y].append("{}".format(licz))
+
+for y in range(8):
+    for x in range(8):
+        print("[{}][{}] - {}".format(y, x, books[y][x]))
+
+print("{}".format(len(books) * len(books[0])))

@@ -6,13 +6,17 @@ import os
 # from enum import IntEnum, auto
 # from pathlib import Path
 
-MAX_BOOKS: int = 74  # Maksymalna ilość ksiąg + 1
+MAX_BOOKS: int = 73  # Maksymalna ilość ksiąg + 1
 
 # ----- Klasa tłumaczeń ItemTrans -----
 class ItemTrans:
     def __init__(self, _pathtr: str):
         self.namepathtr = _pathtr
         self.__fileh__ = None
+        self.books = []  # Lista list z wersetami poszczególnych ksiąg
+        #  Inicjalizacja listy ksiąg z wersetami
+        for licz in range(MAX_BOOKS):
+            self.books.append([])
         #  Odczyt nazwy tłumaczenia z pierwszej linijki pliku
         try:
             self.__fileh__ = open(self.namepathtr, "rt", encoding="utf-8")
@@ -23,13 +27,16 @@ class ItemTrans:
 
     def __readallbooks__(self):  # Metoda prywatna
         #  Odczyt poszczególnych ksiąg
-        strtext = self.__fileh__.readline() # .strip("\n")
-        for coutbooks in range(1, MAX_BOOKS):
+        item = 0
+        strtext = self.__fileh__.readline().strip("\n")
+        for coutbooks in range(MAX_BOOKS):
             while strtext:
-                if int(strtext[0:3]) == coutbooks:
-                    # print("{}-{} - {}".format(len(strtext), self.fileh.tell(), strtext.strip("\n")))
-                    break
-                strtext = self.__fileh__.readline() # .strip("\n")
+                if int(strtext[0:3]) == coutbooks + 1:
+                    self.books[coutbooks].append(strtext)
+                else:
+                    break  # Koniec księgi
+
+                strtext = self.__fileh__.readline().strip("\n")
 
 # ----- Klasa główna MyBiblePyClass -----
 class MyBiblePyClass:
@@ -73,4 +80,4 @@ class MyBiblePyClass:
         finally:
             file.close()
 
-        return strtext # [10:]
+        return strtext[10:]

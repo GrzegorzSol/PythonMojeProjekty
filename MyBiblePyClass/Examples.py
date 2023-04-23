@@ -7,9 +7,10 @@ mbpc = MyBiblePyClass("F:\\DevelopGS\\Dane dla MojaBiblia\\Data")
 #     print(x)
 
 print("Wczytano {} tłumaczeń".format(len(mbpc.itemstr)))
-ITRANSLATE = 1
+ITRANSLATE = 2
 
 it = mbpc.itemstr[ITRANSLATE]
 print("{} - {}".format(it.infotr, it.namepathtr))
 
-print(mbpc.readtext(ITRANSLATE, 64, 1, 1))
+#  print(mbpc.readtext(ITRANSLATE, 64, 1, 1))
+print(it.books[65][15])
