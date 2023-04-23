@@ -6,37 +6,30 @@ import os
 # from enum import IntEnum, auto
 # from pathlib import Path
 
-MAX_BOOKS: int = 73  # Maksymalna ilość ksiąg
+MAX_BOOKS: int = 74  # Maksymalna ilość ksiąg + 1
 
 # ----- Klasa tłumaczeń ItemTrans -----
 class ItemTrans:
     def __init__(self, _pathtr: str):
         self.namepathtr = _pathtr
-        self.books: int = []  # Tablica ksiąg
-        self.fileh = None
+        self.__fileh__ = None
         #  Odczyt nazwy tłumaczenia z pierwszej linijki pliku
         try:
-            self.fileh = open(self.namepathtr, "rt", encoding="utf-8")
-            self.infotr = self.fileh.readline().strip("\n")  # opis
+            self.__fileh__ = open(self.namepathtr, "rt", encoding="utf-8")
+            self.infotr = self.__fileh__.readline().strip("\n")  # opis
             self.__readallbooks__()
         finally:
-            self.fileh.close()
+            self.__fileh__.close()
 
     def __readallbooks__(self):  # Metoda prywatna
         #  Odczyt poszczególnych ksiąg
-        # for coutbooks in range(1, MAX_BOOKS):
-        #     for strtext in self.fileh:
-        #         if int(strtext[0:3]) == coutbooks:
-        #             print("{}".format(strtext.strip("\n")))
-        #             break
-        strtext = self.fileh.readline() # .strip("\n")
+        strtext = self.__fileh__.readline() # .strip("\n")
         for coutbooks in range(1, MAX_BOOKS):
             while strtext:
                 if int(strtext[0:3]) == coutbooks:
-                    self.books.append(self.fileh.tell() - len(strtext) - 5)
                     # print("{}-{} - {}".format(len(strtext), self.fileh.tell(), strtext.strip("\n")))
                     break
-                strtext = self.fileh.readline() # .strip("\n")
+                strtext = self.__fileh__.readline() # .strip("\n")
 
 # ----- Klasa główna MyBiblePyClass -----
 class MyBiblePyClass:
@@ -62,6 +55,7 @@ class MyBiblePyClass:
         mytranslate: str = self.itemstr[_itrans].namepathtr
         file = None
         strtext = None
+        items = None
         try:
             file = open(mytranslate, "rt", encoding="utf-8")
             file.readline().strip("\n")  # opis
@@ -79,4 +73,4 @@ class MyBiblePyClass:
         finally:
             file.close()
 
-        return strtext[10:]
+        return strtext # [10:]

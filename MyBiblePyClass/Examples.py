@@ -12,10 +12,4 @@ ITRANSLATE = 1
 it = mbpc.itemstr[ITRANSLATE]
 print("{} - {}".format(it.infotr, it.namepathtr))
 
-file = open(mbpc.filenames[ITRANSLATE], "r", encoding="utf-8")
-file.seek(it.books[1])
-line = file.readline()
-print(line)
-file.close()
-
-# print(mbpc.readtext(ITRANSLATE, 45, 1, 1))
+print(mbpc.readtext(ITRANSLATE, 64, 1, 1))
