@@ -6,11 +6,11 @@ mbpc = MyBiblePyClass("F:\\DevelopGS\\Dane dla MojaBiblia\\Data")
 # for x in mbpc.filenames:
 #     print(x)
 
-print("Wczytano {} tłumaczeń".format(len(mbpc.itemstr)))
-ITRANSLATE = 2
+print("\t\tWczytano {} tłumaczeń".format(len(mbpc.itemstr)))
+ITRANSLATE = 1
 
 it = mbpc.itemstr[ITRANSLATE]
-print("{} - {}".format(it.infotr, it.namepathtr))
+print("\t\t{}".format(it.infotr))
 
-#  print(mbpc.readtext(ITRANSLATE, 64, 1, 1))
-print(it.books[65][15])
+print(mbpc.readtext(ITRANSLATE, 1, 1, 1))
+print(mbpc.readtext(ITRANSLATE, 1, 1, 2))
