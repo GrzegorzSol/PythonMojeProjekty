@@ -138,7 +138,7 @@ class MyBiblePyClass:
                 self.filenames.append(myfilenames)
                 self.itemstr.append(ItemTrans(myfilenames))  # Dodawanie do tablicy objektów tłumaczenia
 
-    def readtext(self, _itrans: int, _ibook: int, _ichapt: int, _ivers: int):
+    def readtext(self, _itrans: int, _ibook: int, _ichapt: int = 1, _ivers: int = 1):
         if _itrans >= len(self.filenames) or _ibook == 0 or _ichapt == 0 or _ivers == 0:
             return  # Jeśli przekroczono zakresy
 
@@ -156,10 +156,14 @@ class MyBiblePyClass:
             rfulladress = strtext[0:9]
             ibook = int(rfulladress[0:3])
             ichapt = int(rfulladress[3:6])
-            ivers = int(rfulladress[6:9])
+            try:
+                ivers = int(rfulladress[6:9])
+            except ValueError:
+                ivers = int(rfulladress[6:8])
+                # print("except")
+
             if ibook == _ibook and ichapt == _ichapt and ivers == _ivers:
                 textout = "{} {}:{} {}".format(InfoAllBooks[ibook - 1][EnumInfoAllBooks.eninfo_Smalname], ichapt, ivers, strtext[10:])
                 break
 
         return textout
-
