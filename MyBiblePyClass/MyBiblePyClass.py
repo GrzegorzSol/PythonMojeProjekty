@@ -138,21 +138,20 @@ class MyBiblePyClass:
                 self.filenames.append(myfilenames)
                 self.itemstr.append(ItemTrans(myfilenames))  # Dodawanie do tablicy objektów tłumaczenia
 
-    def readtextall(self, _ibook: int, _ichapt:int = 1, _iver: int = 1):
+    def readtextall(self, _ibook: int, _ichapt: int = 1, _iver: int = 1) -> []:
+
+        resultlist = []
         for numtr in range(len(self.itemstr)):
             it = self.itemstr[numtr]
-            # print(it.namepathtr)
-            print("{} [{}]".format(self.readtext(numtr, _ibook, _ichapt, _iver), it.infotr))
+            resultlist.append("{} [{}]".format(self.readtext(numtr, _ibook, _ichapt, _iver), it.infotr))
 
-    def readtext(self, _itrans: int, _ibook: int, _ichapt: int = 1, _ivers: int = 1):
+        return resultlist
+
+    def readtext(self, _itrans: int, _ibook: int, _ichapt: int = 1, _ivers: int = 1) -> str:
         if _itrans >= len(self.filenames) or _ibook == 0 or _ichapt == 0 or _ivers == 0:
-            return  # Jeśli przekroczono zakresy
+            return ""  # Jeśli przekroczono zakresy
 
-        mytranslate: str = self.itemstr[_itrans].namepathtr
         it = self.itemstr[_itrans]
-        file = None
-        strtext = None
-        items = None
         textout = None
 
         for cVers in range(len(it.books[_ibook-1])):

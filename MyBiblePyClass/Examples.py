@@ -8,6 +8,9 @@ ITRANSLATE = 2
 it = mbpc.itemstr[ITRANSLATE]
 # print("\t\t{}".format(it.infotr))
 
-# print(mbpc.readtext(ITRANSLATE, 6, 15, 59))
+print("{}{}".format(mbpc.readtext(ITRANSLATE, 6, 15, 59), "\n"))
 
-mbpc.readtextall(12, 2, 23)
+listaresult = []
+listaresult = mbpc.readtextall(12, 2, 23)
+for str in listaresult:
+    print(str)
