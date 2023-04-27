@@ -5,6 +5,8 @@ import os
 # from datetime import datetime
 from enum import IntEnum, auto
 # from pathlib import Path
+import fpdf
+from fpdf import FPDF
 
 MAX_BOOKS: int = 73  # Maksymalna ilość ksiąg + 1
 class EnumInfoAllBooks(IntEnum):
@@ -110,6 +112,9 @@ class ItemTrans:
             self.__fileh__.close()
 
     def __readallbooks__(self):  # Metoda prywatna
+        """
+        @return: Brak
+        """
         #  Odczyt poszczególnych ksiąg
         strtext = self.__fileh__.readline().strip("\n")
         for coutbooks in range(MAX_BOOKS):
@@ -125,12 +130,16 @@ class ItemTrans:
 class MyBiblePyClass:
     # Konstruktor
     def __init__(self, _pathtrdir: str):
+        """
+        @param _pathtrdir: Ścieżka dostępu do katalogu z tłumaczeniami
+        """
         # Private
         self.__version: str = "0.1"
         # Public
         self.pathtrdir: str = _pathtrdir
         self.filenames = []  # Tablica
         self.itemstr: ItemTrans = []
+        self.test = 0
 
         for myfilenames in os.listdir(self.pathtrdir):
             if myfilenames.endswith(".pltmb"):  # filtr
@@ -139,7 +148,12 @@ class MyBiblePyClass:
                 self.itemstr.append(ItemTrans(myfilenames))  # Dodawanie do tablicy objektów tłumaczenia
 
     def readtextall(self, _ibook: int, _ichapt: int = 1, _iver: int = 1) -> []:
-
+        """
+        @param _ibook: Numer księgi
+        @param _ichapt: Numer rozdziału, domyślnie 1
+        @param _iver: Numer wersetu, domyślnie 1
+        @return: Metoda zwraca listę tekstów biblijnych wszystkich dostępnych tłumaczeń
+        """
         resultlist = []
         for numtr in range(len(self.itemstr)):
             it = self.itemstr[numtr]
@@ -148,6 +162,13 @@ class MyBiblePyClass:
         return resultlist
 
     def readtext(self, _itrans: int, _ibook: int, _ichapt: int = 1, _ivers: int = 1) -> str:
+        """
+        @param _itrans: Numer tłumaczenia
+        @param _ibook: Numer księgi
+        @param _ichapt: Numer rozdziału, domyślnie 1
+        @param _ivers: Numer wersetu, domyślnie 1
+        @return: Metoda zwraca tekst biblijny, określony w argumentach metody
+        """
         if _itrans >= len(self.filenames) or _ibook == 0 or _ichapt == 0 or _ivers == 0:
             return ""  # Jeśli przekroczono zakresy
 
@@ -172,3 +193,27 @@ class MyBiblePyClass:
                 break
 
         return textout
+
+    @staticmethod
+    def createpdfalltext(_intlisttext: []):
+        """
+        @param _intlisttext:
+        @return:
+        """
+        i: int = 0
+        pdf = fpdf.FPDF(orientation="P", unit="pt", format="A4")
+        pdf.add_page()
+        # Definiowanie kolekcji używanych czcionek UTF-8
+        pdf.add_font("TimesI", fname="C:\\Windows\\Fonts\\Timesi.ttf")
+        pdf.add_font("TimesN", fname="C:\\Windows\\Fonts\\Times.ttf")
+        pdf.add_font("TimesB", fname="C:\\Windows\\Fonts\\Timesbd.ttf")
+        pdf.add_font("TimesBI", fname="C:\\Windows\\Fonts\\Timesbi.ttf")
+
+        pdf.set_font("TimesN", size=11)
+
+        for strout in _intlisttext:
+            pdf.text(x=5, y=(16*i)+16, txt=strout)
+            i = i+1
+
+        fileresultpdf: str = os.path.join(os.path.dirname(os.path.abspath(__file__)), "result.pdf")
+        pdf.output(fileresultpdf)

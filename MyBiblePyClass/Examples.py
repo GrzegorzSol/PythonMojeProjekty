@@ -8,9 +8,11 @@ ITRANSLATE = 2
 it = mbpc.itemstr[ITRANSLATE]
 # print("\t\t{}".format(it.infotr))
 
-print("{}{}".format(mbpc.readtext(ITRANSLATE, 6, 15, 59), "\n"))
+# print("{}{}".format(mbpc.readtext(ITRANSLATE, 6, 15, 59), "\n"))
 
 listaresult = []
 listaresult = mbpc.readtextall(12, 2, 23)
-for str in listaresult:
-    print(str)
+# for strout in listaresult:
+#     print(strout)
+
+mbpc.createpdfalltext(listaresult)
