@@ -11,13 +11,23 @@ import fpdf
 MAX_BOOKS: int = 73  # Maksymalna ilość ksiąg + 1
 
 class EnumInfoAllBooks(IntEnum):
+    # Znaczenie poszczególnych pól listy infoallbooks []
     eninfo_Number = 0
     eninfo_Fullname = auto()  # Pełna nazwa księgi
     eninfo_Smalname = auto()  # Skrócona nazwa księgi
     eninfo_Coutchapt = auto()  # Ilość rozdziałów w księdze
 
+class EnumDecodeListText(IntEnum):
+    # Znaczenie poszczególnych pól listy zwracanej przez metodę MyBiblePyClass.readtext
+    endec_text = 0
+    endec_trans = auto()
+    endec_smalnamebook = auto()
+    endec_book = auto()
+    endec_chapt = auto()
+    endec_vers = auto()
 
-InfoAllBooks = [  # --- Stary Testament
+
+infoallbooks = [  # --- Stary Testament
     [1, "1 Mojżeszowa", "1Moj", 50],  # 0
     [2, "2 Mojżeszowa", "2Moj", 40],  # 1
     [3, "3 Mojżeszowa", "3Moj", 27],  # 2
@@ -158,12 +168,15 @@ class MyBiblePyClass:
         resultlist = []
         it: str
         for numtr in range(len(self.itemstr)):
-            it = self.itemstr[numtr]
-            resultlist.append("{} [{}]".format(self.readtext(numtr, _ibook, _ichapt, _iver), it.infotr))
-
+            resultonetext = self.readtext(numtr, _ibook, _ichapt, _iver)
+            resultlist.append("{} {}:{} {}".format(resultonetext[EnumDecodeListText.endec_smalnamebook],
+                                                   resultonetext[EnumDecodeListText.endec_chapt],
+                                                   resultonetext[EnumDecodeListText.endec_vers],
+                                                   resultonetext[EnumDecodeListText.endec_text]))
+        self.createpdfalltext(resultlist)
         return resultlist
 
-    def readtext(self, _itrans: int, _ibook: int, _ichapt: int = 1, _ivers: int = 1) -> str:
+    def readtext(self, _itrans: int, _ibook: int, _ichapt: int = 1, _ivers: int = 1) -> []:
         """
         @param _itrans: Numer tłumaczenia
         @param _ibook: Numer księgi
@@ -175,7 +188,7 @@ class MyBiblePyClass:
             return ""  # Jeśli przekroczono zakresy
 
         it = self.itemstr[_itrans]
-        textout = None
+        listout = []
 
         for cVers in range(len(it.books[_ibook - 1])):
             strtext = it.books[_ibook - 1][cVers]
@@ -191,16 +204,21 @@ class MyBiblePyClass:
                 # print("except")
 
             if ibook == _ibook and ichapt == _ichapt and ivers == _ivers:
-                textout = "{} {}:{} {}".format(InfoAllBooks[ibook - 1][EnumInfoAllBooks.eninfo_Smalname], ichapt, ivers,
-                                               strtext[10:])
+                textout = "{}".format(strtext[10:])
+                listout.append(textout)
+                listout.append(_itrans)
+                listout.append(infoallbooks[ibook - 1][EnumInfoAllBooks.eninfo_Smalname])
+                listout.append(ibook)
+                listout.append(ichapt)
+                listout.append(ivers)
                 break
 
-        return textout
+        return listout  # Będzie zwracaś listę [tekst, tłumaczenie, skrócona nazwa księgi, księga, rozdział, werset] ?
 
     @staticmethod
-    def createpdfalltext(_intlisttext: []):
+    def createpdfalltext(_fullintext: []):
         """
-        @param _intlisttext:
+        @param _fullintext:
         @return:
         """
         pdf = fpdf.FPDF(orientation="P", unit="pt", format="A4")
@@ -212,10 +230,11 @@ class MyBiblePyClass:
         pdf.add_font("TimesB", fname="C:\\Windows\\Fonts\\Timesbd.ttf")
         pdf.add_font("TimesBI", fname="C:\\Windows\\Fonts\\Timesbi.ttf")
 
-        pdf.set_font("TimesN", size=11)
-        pdf.set_xy(5, 16)
-        for strout in _intlisttext:
-            pdf.multi_cell(w=page_width, h=50, txt=strout, new_x="LEFT",
+        pdf.set_font("TimesN", size=16)
+
+        pdf.set_xy(5, pdf.font_size)
+        for strout in _fullintext:
+            pdf.multi_cell(w=page_width, h=pdf.font_size * 4, txt=strout, new_x="LEFT",
                            new_y="NEXT", align="L", max_line_height=pdf.font_size)
 
         fileresultpdf: str = os.path.join(os.path.dirname(os.path.abspath(__file__)), "result.pdf")
