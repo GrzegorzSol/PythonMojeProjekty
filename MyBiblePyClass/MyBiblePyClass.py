@@ -6,9 +6,10 @@ import os
 from enum import IntEnum, auto
 # from pathlib import Path
 import fpdf
-from fpdf import FPDF
+# from fpdf import FPDF
 
 MAX_BOOKS: int = 73  # Maksymalna ilość ksiąg + 1
+
 class EnumInfoAllBooks(IntEnum):
     eninfo_Number = 0
     eninfo_Fullname = auto()  # Pełna nazwa księgi
@@ -106,7 +107,7 @@ class ItemTrans:
         #  Odczyt nazwy tłumaczenia z pierwszej linijki pliku
         try:
             self.__fileh__ = open(self.namepathtr, "rt", encoding="utf-8")
-            self.infotr = self.__fileh__.readline().strip("\n")  # opis
+            self.infotr = self.__fileh__.readline().strip("\n")[1:]  # opis
             self.__readallbooks__()
         finally:
             self.__fileh__.close()
@@ -155,6 +156,7 @@ class MyBiblePyClass:
         @return: Metoda zwraca listę tekstów biblijnych wszystkich dostępnych tłumaczeń
         """
         resultlist = []
+        it: str
         for numtr in range(len(self.itemstr)):
             it = self.itemstr[numtr]
             resultlist.append("{} [{}]".format(self.readtext(numtr, _ibook, _ichapt, _iver), it.infotr))
@@ -175,7 +177,7 @@ class MyBiblePyClass:
         it = self.itemstr[_itrans]
         textout = None
 
-        for cVers in range(len(it.books[_ibook-1])):
+        for cVers in range(len(it.books[_ibook - 1])):
             strtext = it.books[_ibook - 1][cVers]
             if strtext == "":
                 break
@@ -189,7 +191,8 @@ class MyBiblePyClass:
                 # print("except")
 
             if ibook == _ibook and ichapt == _ichapt and ivers == _ivers:
-                textout = "{} {}:{} {}".format(InfoAllBooks[ibook - 1][EnumInfoAllBooks.eninfo_Smalname], ichapt, ivers, strtext[10:])
+                textout = "{} {}:{} {}".format(InfoAllBooks[ibook - 1][EnumInfoAllBooks.eninfo_Smalname], ichapt, ivers,
+                                               strtext[10:])
                 break
 
         return textout
@@ -200,9 +203,9 @@ class MyBiblePyClass:
         @param _intlisttext:
         @return:
         """
-        i: int = 0
         pdf = fpdf.FPDF(orientation="P", unit="pt", format="A4")
         pdf.add_page()
+        page_width = pdf.w - 2 * pdf.l_margin
         # Definiowanie kolekcji używanych czcionek UTF-8
         pdf.add_font("TimesI", fname="C:\\Windows\\Fonts\\Timesi.ttf")
         pdf.add_font("TimesN", fname="C:\\Windows\\Fonts\\Times.ttf")
@@ -210,10 +213,10 @@ class MyBiblePyClass:
         pdf.add_font("TimesBI", fname="C:\\Windows\\Fonts\\Timesbi.ttf")
 
         pdf.set_font("TimesN", size=11)
-
+        pdf.set_xy(5, 16)
         for strout in _intlisttext:
-            pdf.text(x=5, y=(16*i)+16, txt=strout)
-            i = i+1
+            pdf.multi_cell(w=page_width, h=50, txt=strout, new_x="LEFT",
+                           new_y="NEXT", align="L", max_line_height=pdf.font_size)
 
         fileresultpdf: str = os.path.join(os.path.dirname(os.path.abspath(__file__)), "result.pdf")
         pdf.output(fileresultpdf)

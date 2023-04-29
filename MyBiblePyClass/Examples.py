@@ -12,7 +12,7 @@ it = mbpc.itemstr[ITRANSLATE]
 
 listaresult = []
 listaresult = mbpc.readtextall(12, 2, 23)
-# for strout in listaresult:
-#     print(strout)
+for strout in listaresult:
+    print(strout)
 
 mbpc.createpdfalltext(listaresult)
