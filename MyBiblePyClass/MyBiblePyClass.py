@@ -166,14 +166,14 @@ class MyBiblePyClass:
         @return: Metoda zwraca listę tekstów biblijnych wszystkich dostępnych tłumaczeń
         """
         resultlist = []
-        it: str
+        resultonetext = []
+
         for numtr in range(len(self.itemstr)):
             resultonetext = self.readtext(numtr, _ibook, _ichapt, _iver)
             resultlist.append("{} {}:{} {}".format(resultonetext[EnumDecodeListText.endec_smalnamebook],
                                                    resultonetext[EnumDecodeListText.endec_chapt],
                                                    resultonetext[EnumDecodeListText.endec_vers],
                                                    resultonetext[EnumDecodeListText.endec_text]))
-        self.createpdfalltext(resultlist)
         return resultlist
 
     def readtext(self, _itrans: int, _ibook: int, _ichapt: int = 1, _ivers: int = 1) -> []:
@@ -215,12 +215,14 @@ class MyBiblePyClass:
 
         return listout  # Będzie zwracaś listę [tekst, tłumaczenie, skrócona nazwa księgi, księga, rozdział, werset] ?
 
-    @staticmethod
-    def createpdfalltext(_fullintext: []):
+    def createpdfalltext(self, _ibook: int, _ichapt: int = 1, _iver: int = 1):
         """
-        @param _fullintext:
+        @param _ibook:
+        @param _ichapt:
+        @param _iver:
         @return:
         """
+        setfontsize = 16
         pdf = fpdf.FPDF(orientation="P", unit="pt", format="A4")
         pdf.add_page()
         page_width = pdf.w - 2 * pdf.l_margin
@@ -230,12 +232,35 @@ class MyBiblePyClass:
         pdf.add_font("TimesB", fname="C:\\Windows\\Fonts\\Timesbd.ttf")
         pdf.add_font("TimesBI", fname="C:\\Windows\\Fonts\\Timesbi.ttf")
 
-        pdf.set_font("TimesN", size=16)
-
-        pdf.set_xy(5, pdf.font_size)
-        for strout in _fullintext:
-            pdf.multi_cell(w=page_width, h=pdf.font_size * 4, txt=strout, new_x="LEFT",
+        pdf.set_xy(5, setfontsize)
+        resultlist = []
+        for numtr in range(len(self.itemstr)):
+            resultonetext = self.readtext(numtr, _ibook, _ichapt, _iver)
+            # Adres wersetu
+            pdf.set_text_color(0, 0, 255)
+            stradres = "{} {}:{}".format(resultonetext[EnumDecodeListText.endec_smalnamebook],
+                                         resultonetext[EnumDecodeListText.endec_chapt],
+                                         resultonetext[EnumDecodeListText.endec_vers])
+            pdf.set_font("TimesB", size=setfontsize)
+            pdf.multi_cell(w=page_width, txt=stradres, new_x="LEFT",
                            new_y="NEXT", align="L", max_line_height=pdf.font_size)
+            # Właściwy tekst wersetu
+            pdf.set_text_color(0)
+            pdf.set_x(pdf.font_size)
+            pdf.set_font("TimesN", size=setfontsize)
+            pdf.multi_cell(w=page_width, txt=resultonetext[EnumDecodeListText.endec_text], new_x="LEFT",
+                           new_y="NEXT", align="L", max_line_height=pdf.font_size)
+            # Nazwa tłumaczenia
+            pdf.set_font("TimesN", size=setfontsize - 4)
+            pdf.set_text_color(255, 0, 0)
+            pdf.set_x(5)
+            strtrans = "[{}]".format(self.itemstr[numtr].infotr)
+            pdf.multi_cell(w=page_width, txt=strtrans, new_x="LEFT",
+                           new_y="NEXT", align="L", max_line_height=pdf.font_size)
+            # Oddzielający wiersz z trzema gwiazdkami
+            pdf.set_text_color(0)
+            pdf.multi_cell(w=page_width, txt="* * *", new_x="LEFT",
+                           new_y="NEXT", align="C", max_line_height=pdf.font_size)
 
         fileresultpdf: str = os.path.join(os.path.dirname(os.path.abspath(__file__)), "result.pdf")
         pdf.output(fileresultpdf)

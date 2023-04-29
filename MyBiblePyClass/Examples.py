@@ -14,8 +14,8 @@ ITRANSLATE = 2
 #                      listvers[EnumDecodeListText.endec_vers],
 #                      listvers[EnumDecodeListText.endec_text], "\n"))
 
-listaresult = mbpc.readtextall(60, 2, 4)
-for strout in listaresult:
-    print(strout)
+# listaresult = mbpc.readtextall(60, 2, 4)
+# for strout in listaresult:
+#     print(strout)
 
-# mbpc.createpdfalltext(listaresult)
+mbpc.createpdfalltext(60, 2, 4)
