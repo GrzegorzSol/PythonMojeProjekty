@@ -6,6 +6,7 @@ import os
 from enum import IntEnum, auto
 # from pathlib import Path
 import fpdf
+
 # from fpdf import FPDF
 
 MAX_BOOKS: int = 73  # Maksymalna ilość ksiąg + 1
@@ -25,7 +26,6 @@ class EnumDecodeListText(IntEnum):
     endec_book = auto()
     endec_chapt = auto()
     endec_vers = auto()
-
 
 infoallbooks = [  # --- Stary Testament
     [1, "1 Mojżeszowa", "1Moj", 50],  # 0
@@ -166,17 +166,18 @@ class MyBiblePyClass:
         @return: Metoda zwraca listę tekstów biblijnych wszystkich dostępnych tłumaczeń
         """
         resultlist = []
-        resultonetext = []
 
         for numtr in range(len(self.itemstr)):
-            resultonetext = self.readtext(numtr, _ibook, _ichapt, _iver)
+            resultonetext = self.__readtext__(numtr, _ibook, _ichapt, _iver)
             resultlist.append("{} {}:{} {}".format(resultonetext[EnumDecodeListText.endec_smalnamebook],
                                                    resultonetext[EnumDecodeListText.endec_chapt],
                                                    resultonetext[EnumDecodeListText.endec_vers],
                                                    resultonetext[EnumDecodeListText.endec_text]))
+
+        self.__createpdfalltext__(_ibook, _ichapt, _iver)
         return resultlist
 
-    def readtext(self, _itrans: int, _ibook: int, _ichapt: int = 1, _ivers: int = 1) -> []:
+    def __readtext__(self, _itrans: int, _ibook: int, _ichapt: int = 1, _ivers: int = 1) -> []:
         """
         @param _itrans: Numer tłumaczenia
         @param _ibook: Numer księgi
@@ -215,14 +216,15 @@ class MyBiblePyClass:
 
         return listout  # Będzie zwracaś listę [tekst, tłumaczenie, skrócona nazwa księgi, księga, rozdział, werset] ?
 
-    def createpdfalltext(self, _ibook: int, _ichapt: int = 1, _iver: int = 1):
+    def __createpdfalltext__(self, _ibook: int, _ichapt: int = 1, _iver: int = 1):
         """
-        @param _ibook:
-        @param _ichapt:
-        @param _iver:
-        @return:
+        @param _ibook: Numer księgi
+        @param _ichapt: Numer rozdziału
+        @param _iver: Numer wersetu
+        @return: Brak
         """
         setfontsize = 16
+        myimage: str = "Tora.png"
         pdf = fpdf.FPDF(orientation="P", unit="pt", format="A4")
         pdf.add_page()
         page_width = pdf.w - 2 * pdf.l_margin
@@ -232,10 +234,13 @@ class MyBiblePyClass:
         pdf.add_font("TimesB", fname="C:\\Windows\\Fonts\\Timesbd.ttf")
         pdf.add_font("TimesBI", fname="C:\\Windows\\Fonts\\Timesbi.ttf")
 
+        with pdf.local_context(fill_opacity=0.4):
+            pdf.image(myimage, x=1, y=1)
+
         pdf.set_xy(5, setfontsize)
-        resultlist = []
+
         for numtr in range(len(self.itemstr)):
-            resultonetext = self.readtext(numtr, _ibook, _ichapt, _iver)
+            resultonetext = self.__readtext__(numtr, _ibook, _ichapt, _iver)
             # Adres wersetu
             pdf.set_text_color(0, 0, 255)
             stradres = "{} {}:{}".format(resultonetext[EnumDecodeListText.endec_smalnamebook],
