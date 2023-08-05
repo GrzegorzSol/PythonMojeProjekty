@@ -1,10 +1,11 @@
-import os
-import shutil
+from os import chdir, path, system
+from shutil import copy, copytree, ignore_patterns
+from pathlib import Path
 
 # Ścieżka dostępu do katalogu źródłowego
 SourceDir: str = "F:\\DevelopGS\\MojaBibliaNG_Testing"
 # Ścieżka dostępu do katalogu przeznaczenia
-DestDir: str = "F:\\DevelopGS\\Python\\PythonMojeProjekty\\Skrypty\\Testy"  # "F:\\DevelopGS\\MojaBibliaNG_Git"
+DestDir: str = "F:\\DevelopGS\\MojaBibliaNG_Git" # "F:\\DevelopGS\\Python\\PythonMojeProjekty\\Skrypty\\Testy"
 # Lista plików do pominienia
 ListNames = ["GsDebugClass.h", "Headers.h",
              # Lista plików z katalogu źródłowego do skopiowania do katalogu przeznaczenia
@@ -30,12 +31,20 @@ ListNames = ["GsDebugClass.h", "Headers.h",
 # Nazwy katalogów dodatkowych modułów
 ListModules = ["GsComponents", "GsReadBibleTextClass"]
 
-os.chdir(SourceDir)
+chdir(SourceDir)
+resultstring: str
+strpatterns: str = "__*"
 # Kopiowanie plików do katalogu głównego
 for mypath in ListNames:
-    shutil.copy(mypath, DestDir)
+    resultstring = copy(mypath, DestDir)
+    print("Sopiowano {}".format(resultstring))
+
 # Kopiowanie plików z modułów dodatkowych
 for mymodulepath in ListModules:
-    shutil.copytree(mymodulepath, os.path.join(DestDir, mymodulepath), dirs_exist_ok=True)
+    Path(path.join(DestDir, mymodulepath)).mkdir(parents=True,
+                                                 exist_ok=True)  # Sprawdzanie, czy istnieje katalog na archiwum, jeśli nie to zostanie stworzony (Python ≥ 3.5)
+    resultstring = copytree(mymodulepath, path.join(DestDir, mymodulepath), dirs_exist_ok=True,
+                            ignore=ignore_patterns(strpatterns))
+    print("Sopiowano {}".format(resultstring))
 
-# os.system("dir")
+system("pause")  # Czekanie na naciśnięcie dowolnego klawisza by zamknąć konsole
