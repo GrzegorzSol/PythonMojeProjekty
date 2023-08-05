@@ -1,4 +1,4 @@
-from MyBiblePyClass import MyBiblePyClass, EnumDecodeListText
+from MyBiblePyClass import MyBiblePyClass  # , EnumDecodeListText
 
 mbpc = MyBiblePyClass("F:\\DevelopGS\\Dane dla MojaBiblia\\Data")
 
@@ -14,7 +14,6 @@ ITRANSLATE = 2
 #                      listvers[EnumDecodeListText.endec_vers],
 #                      listvers[EnumDecodeListText.endec_text], "\n"))
 
-listaresult = mbpc.readtextall(60, 2, 4)
+listaresult = mbpc.readtextall(41, 2, 4)
 for strout in listaresult:
     print(strout)
-

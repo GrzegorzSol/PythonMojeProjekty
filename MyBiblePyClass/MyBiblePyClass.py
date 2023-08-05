@@ -27,6 +27,7 @@ class EnumDecodeListText(IntEnum):
     endec_chapt = auto()
     endec_vers = auto()
 
+
 infoallbooks = [  # --- Stary Testament
     [1, "1 Mojżeszowa", "1Moj", 50],  # 0
     [2, "2 Mojżeszowa", "2Moj", 40],  # 1
@@ -122,6 +123,9 @@ class ItemTrans:
         finally:
             self.__fileh__.close()
 
+    def __getitem__(self, item: int):
+        return self
+
     def __readallbooks__(self):  # Metoda prywatna
         """
         @return: Brak
@@ -145,18 +149,26 @@ class MyBiblePyClass:
         @param _pathtrdir: Ścieżka dostępu do katalogu z tłumaczeniami
         """
         # Private
-        self.__version: str = "0.1"
+        self.__version__: str = "v0.3.5678"
         # Public
-        self.pathtrdir: str = _pathtrdir
-        self.filenames = []  # Tablica
-        self.itemstr: ItemTrans = []
-        self.test = 0
+        self.__pathtrdir__: str = _pathtrdir
+        self.__filenames__ = []  # Tablica
+        self.__itemstr__ = []  # Tablica objektów typu ItemTrans
 
-        for myfilenames in os.listdir(self.pathtrdir):
+        for myfilenames in os.listdir(self.__pathtrdir__):
             if myfilenames.endswith(".pltmb"):  # filtr
-                myfilenames = os.path.join(self.pathtrdir, myfilenames)
-                self.filenames.append(myfilenames)
-                self.itemstr.append(ItemTrans(myfilenames))  # Dodawanie do tablicy objektów tłumaczenia
+                myfilenames = os.path.join(self.__pathtrdir__, myfilenames)
+                self.__filenames__.append(myfilenames)
+                self.__itemstr__.append(ItemTrans(myfilenames))  # Dodawanie do tablicy objektów tłumaczenia
+
+    def getversion(self):
+        """
+        @return: Metoda zwraca prywatne pole wersji biblioteki
+        """
+        return self.__version__
+
+    # def __getitem__(self, item: int):
+    #     return self.itemstr[item]
 
     def readtextall(self, _ibook: int, _ichapt: int = 1, _iver: int = 1) -> []:
         """
@@ -167,7 +179,7 @@ class MyBiblePyClass:
         """
         resultlist = []
 
-        for numtr in range(len(self.itemstr)):
+        for numtr in range(len(self.__itemstr__)):
             resultonetext = self.__readtext__(numtr, _ibook, _ichapt, _iver)
             resultlist.append("{} {}:{} {}".format(resultonetext[EnumDecodeListText.endec_smalnamebook],
                                                    resultonetext[EnumDecodeListText.endec_chapt],
@@ -185,10 +197,10 @@ class MyBiblePyClass:
         @param _ivers: Numer wersetu, domyślnie 1
         @return: Metoda zwraca tekst biblijny, określony w argumentach metody
         """
-        if _itrans >= len(self.filenames) or _ibook == 0 or _ichapt == 0 or _ivers == 0:
+        if _itrans >= len(self.__filenames__) or _ibook == 0 or _ichapt == 0 or _ivers == 0:
             return ""  # Jeśli przekroczono zakresy
 
-        it = self.itemstr[_itrans]
+        it = self.__itemstr__[_itrans]
         listout = []
 
         for cVers in range(len(it.books[_ibook - 1])):
@@ -239,7 +251,7 @@ class MyBiblePyClass:
 
         pdf.set_xy(5, setfontsize)
 
-        for numtr in range(len(self.itemstr)):
+        for numtr in range(len(self.__itemstr__)):
             resultonetext = self.__readtext__(numtr, _ibook, _ichapt, _iver)
             # Adres wersetu
             pdf.set_text_color(0, 0, 255)
@@ -259,7 +271,7 @@ class MyBiblePyClass:
             pdf.set_font("TimesN", size=setfontsize - 4)
             pdf.set_text_color(255, 0, 0)
             pdf.set_x(5)
-            strtrans = "[{}]".format(self.itemstr[numtr].infotr)
+            strtrans = "[{}]".format(self.__itemstr__[numtr].infotr)
             pdf.multi_cell(w=page_width, txt=strtrans, new_x="LEFT",
                            new_y="NEXT", align="L", max_line_height=pdf.font_size)
             # Oddzielający wiersz z trzema gwiazdkami
