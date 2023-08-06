@@ -4,7 +4,7 @@ from shutil import copy2, copytree, ignore_patterns
 # Ścieżka dostępu do katalogu źródłowego
 SourceDir: str = "F:\\DevelopGS\\AKPSerwis\\AtestyAKPSerwis_Testing"
 # Ścieżka dostępu do katalogu przeznaczenia
-#DestDir: str = "F:\\DevelopGS\\AKPSerwis\\AtestyAKPSerwis"
+# DestDir: str = "F:\\DevelopGS\\AKPSerwis\\AtestyAKPSerwis"
 DestDir: str = "F:\\DevelopGS\\Python\\PythonMojeProjekty\\Skrypty\\Testy"
 # Lista plików do pominienia
 ListNames = ["GsDebugClass.h", "GsLibrary.cpp",

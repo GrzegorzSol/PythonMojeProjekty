@@ -1,6 +1,6 @@
 from os import chdir, path, system
-from shutil import copy2, copytree, ignore_patterns
 from pathlib import Path
+from shutil import copy2, copytree, ignore_patterns
 
 # Ścieżka dostępu do katalogu źródłowego
 SourceDir: str = "F:\\DevelopGS\\MojaBibliaNG_Testing"
