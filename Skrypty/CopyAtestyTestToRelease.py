@@ -1,5 +1,5 @@
-from os import chdir, path, system
-from shutil import copy2, copytree, ignore_patterns
+from os import chdir, path, popen
+from shutil import copy2
 
 # Ścieżka dostępu do katalogu źródłowego
 SourceDir: str = "F:\\DevelopGS\\AKPSerwis\\AtestyAKPSerwis_Testing"
@@ -33,4 +33,5 @@ for mypath in ListNames:
     resultstring = copy2(mypath, DestDir)
     print("Sopiowano {}".format(resultstring))
 
-# system("pause")  # Czekanie na naciśnięcie dowolnego klawisza, by zamknąć konsole
+popen(path.join(DestDir, "uGlobalDefsBaseAtests.h"))
+

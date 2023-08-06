@@ -1,4 +1,4 @@
-from os import chdir, path, system
+from os import chdir, path, popen
 from pathlib import Path
 from shutil import copy2, copytree, ignore_patterns
 
@@ -48,4 +48,4 @@ for mymodulepath in ListModules:
                             ignore=ignore_patterns(strpatterns))
     print("Sopiowano {}".format(resultstring))
 
-system("pause")  # Czekanie na naciśnięcie dowolnego klawisza, by zamknąć konsole
+popen(path.join(DestDir, "uGlobalVar.h"))
