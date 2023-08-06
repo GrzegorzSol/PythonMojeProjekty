@@ -1,11 +1,12 @@
 from os import chdir, path, system
-from shutil import copy, copytree, ignore_patterns
+from shutil import copy2, copytree, ignore_patterns
 from pathlib import Path
 
 # Ścieżka dostępu do katalogu źródłowego
 SourceDir: str = "F:\\DevelopGS\\MojaBibliaNG_Testing"
 # Ścieżka dostępu do katalogu przeznaczenia
-DestDir: str = "F:\\DevelopGS\\MojaBibliaNG_Git" # "F:\\DevelopGS\\Python\\PythonMojeProjekty\\Skrypty\\Testy"
+DestDir: str = "F:\\DevelopGS\\MojaBibliaNG_Git"
+# DestDir: str = "F:\\DevelopGS\\Python\\PythonMojeProjekty\\Skrypty\\Testy"
 # Lista plików do pominienia
 ListNames = ["GsDebugClass.h", "Headers.h",
              # Lista plików z katalogu źródłowego do skopiowania do katalogu przeznaczenia
@@ -36,7 +37,7 @@ resultstring: str
 strpatterns: str = "__*"
 # Kopiowanie plików do katalogu głównego
 for mypath in ListNames:
-    resultstring = copy(mypath, DestDir)
+    resultstring = copy2(mypath, DestDir)
     print("Sopiowano {}".format(resultstring))
 
 # Kopiowanie plików z modułów dodatkowych
@@ -47,4 +48,4 @@ for mymodulepath in ListModules:
                             ignore=ignore_patterns(strpatterns))
     print("Sopiowano {}".format(resultstring))
 
-system("pause")  # Czekanie na naciśnięcie dowolnego klawisza by zamknąć konsole
+system("pause")  # Czekanie na naciśnięcie dowolnego klawisza, by zamknąć konsole
