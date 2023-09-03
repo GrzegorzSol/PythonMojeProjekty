@@ -12,9 +12,9 @@ ListNames = ["GsDebugClass.h", "Headers.h",
              # Lista plików z katalogu źródłowego do skopiowania do katalogu przeznaczenia
              "uChapterEditWindow.cpp", "uChapterEditWindow.dfm", "uChapterEditWindow.h",
              "uDictGrecPolWindow.cpp", "uDictGrecPolWindow.dfm", "uDictGrecPolWindow.h",
-             "uFastTipsWindow.cpp", "uFastTipsWindow.dfm", "uFastTipsWindow.h",
+             # "uFastTipsWindow.cpp", "uFastTipsWindow.dfm", "uFastTipsWindow.h",
              "uGlobalVar.cpp", "uGlobalVar.h",
-             "uHelpMyBibleWindow.cpp", "uHelpMyBibleWindow.dfm", "uHelpMyBibleWindow.h",
+             # "uHelpMyBibleWindow.cpp", "uHelpMyBibleWindow.dfm", "uHelpMyBibleWindow.h",
              "uHistoryChaptersOpen.cpp", "uHistoryChaptersOpen.dfm", "uHistoryChaptersOpen.h",
              "uImageAndTextWindow.cpp", "uImageAndTextWindow.dfm", "uImageAndTextWindow.h",
              "uInformationsAppWindow.cpp", "uInformationsAppWindow.dfm", "uInformationsAppWindow.h",
@@ -30,7 +30,7 @@ ListNames = ["GsDebugClass.h", "Headers.h",
              "uSetupsWindow.cpp", "uSetupsWindow.dfm", "uSetupsWindow.h",
              "uViewAllResourcesWindow.cpp", "uViewAllResourcesWindow.dfm", "uViewAllResourcesWindow.h"]
 # Nazwy katalogów dodatkowych modułów
-ListModules = ["GsComponents", "GsReadBibleTextClass"]
+ListModules = ["GsComponents", "MyBibleLibrary"]
 
 chdir(SourceDir)
 resultstring: str
