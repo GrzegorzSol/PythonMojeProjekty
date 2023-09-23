@@ -1,3 +1,8 @@
+#  Copyright (c) Grzegorz Sołtysik
+#  Nazwa projektu: openpyxl
+#  Nazwa pliku: openpyxlTutorials.py
+#  Data: 09.09.2023, 09:05
+
 import datetime
 import calendar
 

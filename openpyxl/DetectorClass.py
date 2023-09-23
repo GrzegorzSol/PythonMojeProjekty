@@ -1,3 +1,8 @@
+#  Copyright (c) Grzegorz Sołtysik
+#  Nazwa projektu: openpyxl
+#  Nazwa pliku: DetectorClass.py
+#  Data: 09.09.2023, 09:05
+
 import datetime
 import calendar
 import enum
@@ -27,7 +32,7 @@ class CheckScheduleClass:
         # Private
         self.__xlspathfile__: str = _strpath  # Ścieżka dostępu do arkusza
         self.__startcell__: int = 4  # Adres pionowy rozpoczęcia danych
-        self.__stopcell__: int = 58  # Adres pionowy zakończenia danych
+        self.__stopcell__: int = 60  # Adres pionowy zakończenia danych
         self.__allowablerange__: int = 20  # Dopuszczalna rożnica między aktualna data a następnym sprawdzaniem.
         # Jeśli różnica jest mniejsza niż zdeklarowana, czujnik jest "Do kalibracji lub sprawdzenia"
         # Public
@@ -35,9 +40,10 @@ class CheckScheduleClass:
         self.actiweworkbook = self.openworkbook.active
         self.nowdate = datetime.datetime.now()  # Aktualna data
 
-    def __add_month__(self, indate: datetime, add: int) -> int:
+    @staticmethod
+    def __add_month__(indate: datetime, add: int) -> int:
         """
-        :param indate: Data początkowa. Ten argument jest potrzebny ze wzgledu na potrzebe znajomości kolejnych miesięcy
+        :param indate: Data początkowa. Ten argument jest, potrzebny ze wzgledu na potrzebe znajomości kolejnych miesięcy
         :param add: Ile miesięcy należy dodać do daty początkowej
         :return: Obliczona ilość dni zawartych w kolejnych miesiącach, które będą dodane
         """
@@ -63,26 +69,30 @@ class CheckScheduleClass:
 
     def execute(self, createfilereport: bool = False):
         file = 0  # Uchwyt do zapisywanego pliku
-        if createfilereport:
-            # Tworzenie raportu kalendarza kontroli czujników
-            filereport: str = "kalendarz_kontroli.txt"
-            file = open(filereport, "w", encoding="utf-8")
-            locale.setlocale(locale.LC_ALL, "")
-            strhead: str = "Raport kalendarza kontroli czujników - {}\n\n".format(self.nowdate.strftime("%d-%B-%Y"))
-            file.write(strhead)
+        filereport: str = "kalendarz_kontroli.txt"
+
+        try:
+            if createfilereport:
+                # Tworzenie raportu kalendarza kontroli czujników
+                file = open(filereport, "w", encoding="utf-8")
+                locale.setlocale(locale.LC_ALL, "")
+                strhead: str = "{:^88}{}\n\n".format("Raport kalendarza kontroli czujników:", self.nowdate.strftime("%d-%B-%Y"))
+                file.write(strhead)
+        except IOError:
+            print("Błąd otwarcia, lub zapisu do pliku: {}".format(filereport))
 
         for iLicz in range(self.__startcell__, self.__stopcell__):
-            adresstitle: str  = "{}{}".format(
+            adresstitle: str = "{}{}".format(
                 AdresAllColumnsTable[EnumAdressColumns.enAdrCol_Object], iLicz)
-            adresslastdata: str  = "{}{}".format(
+            adresslastdata: str = "{}{}".format(
                 AdresAllColumnsTable[EnumAdressColumns.enAdrCol_LastData], iLicz)
-            adressnext: str  = "{}{}".format(
+            adressnext: str = "{}{}".format(
                 AdresAllColumnsTable[EnumAdressColumns.enAdrCol_NextData], iLicz)
             adresstatus: str = "{}{}".format(
                 AdresAllColumnsTable[EnumAdressColumns.enAdrCol_Status], iLicz)
-            adressage: str  = "{}{}".format(AdresAllColumnsTable[EnumAdressColumns.enAdrCol_Ages], iLicz)
+            adressage: str = "{}{}".format(AdresAllColumnsTable[EnumAdressColumns.enAdrCol_Ages], iLicz)
 
-            title: str  = self.actiweworkbook[adresstitle].value
+            title: str = self.actiweworkbook[adresstitle].value
 
             lastdata: datetime = self.actiweworkbook[adresslastdata].value  # Data ostatniego sprawdzania
 
@@ -96,8 +106,11 @@ class CheckScheduleClass:
 
             if createfilereport:
                 # Tworzenie raportu kalendarza kontroli czujników
-                strtowrite: str = "{}\tTermin wzorcowania: {}\n".format(title, nextdata.strftime("%d-%B-%Y"))
-                file.write(strtowrite)
+                strtowrite: str = "{:>74}\tTermin wzorcowania: {}\n".format(title, nextdata.strftime("%d-%B-%Y"))
+                try:
+                    file.write(strtowrite)
+                except IOError:
+                    print("Błąd zapisu do pliku: {}".format(filereport))
 
             # print("deltaint: {} nextdataint: {} delta: {}".format(deltaint, nextdataint, delta ))
             if delta > self.__allowablerange__:

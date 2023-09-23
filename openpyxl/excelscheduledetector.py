@@ -1,6 +1,10 @@
+#  Copyright (c) Grzegorz Sołtysik
+#  Nazwa projektu: openpyxl
+#  Nazwa pliku: excelscheduledetector.py
+#  Data: 09.09.2023, 09:05
+
 import datetime
 import DetectorClass  # Przestrzeń nazw
-# import openpyxl
 
 excellfilepath: str = "TerminarzSprawdzaniaCzujników.xlsx"
 

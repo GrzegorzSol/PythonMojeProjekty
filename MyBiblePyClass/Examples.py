@@ -1,3 +1,8 @@
+#  Copyright (c) Grzegorz Sołtysik
+#  Nazwa projektu: MyBiblePyClass
+#  Nazwa pliku: Examples.py
+#  Data: 09.09.2023, 08:59
+
 from MyBiblePyClass import MyBiblePyClass  # , EnumDecodeListText
 
 mbpc = MyBiblePyClass("F:\\DevelopGS\\Dane dla MojaBiblia\\Data")

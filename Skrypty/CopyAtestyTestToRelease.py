@@ -1,3 +1,9 @@
+
+#  Copyright (c) Grzegorz Sołtysik
+#  Nazwa projektu: Skrypty
+#  Nazwa pliku: CopyAtestyTestToRelease.py
+#  Data: 09.09.2023, 09:04
+
 from os import chdir, path, popen
 from shutil import copy2
 

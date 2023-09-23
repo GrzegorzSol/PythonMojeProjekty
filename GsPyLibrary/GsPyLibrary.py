@@ -1,14 +1,9 @@
-# coding: utf-8
-# -------------------------------------------------------------------------------
-# Name:        Moduł GsPyLibrary
-# Purpose:     Moduł z różnymi funkcjami i klasami
-#
-# Author:      Grzegorz Sołtysik
-#
-# Created:     08.02.2023
-# Copyright:   (c) Grzegorz Sołtysik 2021 v1.0.625
-# Licence:     <GNU>
-# -------------------------------------------------------------------------------
+
+#  Copyright (c) Grzegorz Sołtysik
+#  Nazwa projektu: GsPyLibrary
+#  Nazwa pliku: GsPyLibrary.py
+#  Data: 09.09.2023, 09:00
+
 import configparser
 import locale
 import os

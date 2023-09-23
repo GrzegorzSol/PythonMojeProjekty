@@ -1,3 +1,9 @@
+
+#  Copyright (c) Grzegorz Sołtysik
+#  Nazwa projektu: Skrypty
+#  Nazwa pliku: CopyMojaBibliaTestToRelease.py
+#  Data: 09.09.2023, 09:04
+
 from os import chdir, path, popen
 from pathlib import Path
 from shutil import copy2, copytree, ignore_patterns

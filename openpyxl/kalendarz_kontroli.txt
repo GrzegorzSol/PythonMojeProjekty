@@ -1,56 +1,58 @@
-Raport kalendarza kontroli czujników - 06-wrzesień-2023
+                         Raport kalendarza kontroli czujników:                          15-wrzesień-2023
 
-SSBR- Akumulatorownia w rozdzielni robót	Termin wzorcowania: 27-maj-2023
-Agro	Termin wzorcowania: 19-lipiec-2023
-Miejsko - Przemysłowa Oczyszczalnia Ścieków w Oświęcimiu	Termin wzorcowania: 24-czerwiec-2023
-Kontrola sygnalizatorów Gazex w budynku A-117 ( SD-4 )	Termin wzorcowania: 29-październik-2023
-Kontrola sygnalizatorów Gazex w budynku A-117 ( SD-5 )	Termin wzorcowania: 29-październik-2023
-Kontrola sygnalizatorów Gazex w budynku A-118 ( SD-8 )	Termin wzorcowania: 18-czerwiec-2023
-LNG Instalacja, A-110	Termin wzorcowania: 21-październik-2023
-Kocioł 4,A-110	Termin wzorcowania: 29-kwiecień-2023
-Kocioł 9, A-110	Termin wzorcowania: 17-styczeń-2024
-Agro, Nonan	Termin wzorcowania: 31-styczeń-2024
-Agro, Laboratorium, Wodór	Termin wzorcowania: 31-styczeń-2024
-Kocioł 1-Piec Fluidalny, A-110	Termin wzorcowania: 15-grudzień-2023
-Brentag	Termin wzorcowania: 19-lipiec-2023
-Kontrola sygnalizatora Bias Składowisko Odpadów Komunalnych w Oświęcimiu	Termin wzorcowania: 22-wrzesień-2023
-DP	Termin wzorcowania: 20-październik-2023
-Kontrola eksplozymetrów w bud. E - 99. Czujniki na piecu metanowym.	Termin wzorcowania: 09-listopad-2023
-Kontrola eksplozymetrów w bud. E-99	Termin wzorcowania: 09-listopad-2023
-Kontrola eksplozymetrów w bud. C-116	Termin wzorcowania: 09-listopad-2023
-Kontrola eksplozymetrów w bud. C-110	Termin wzorcowania: 22-listopad-2023
-Kontrola eksplozymetrów C-110 RTO	Termin wzorcowania: 22-listopad-2023
-Kontrola eksplozymetrów w bud. G - 99	Termin wzorcowania: 27-styczeń-2024
-Kontrola eksplozymetrów w bud. G - 120	Termin wzorcowania: 27-styczeń-2024
-Kontrola eksplozymetrów w bud. A - 133	Termin wzorcowania: 27-styczeń-2024
-Kontrola eksplozymetrów w bud. F - 120	Termin wzorcowania: 27-styczeń-2024
-Kontrola eksplozymetrów w bud. G – 107 / G-109	Termin wzorcowania: 27-styczeń-2024
-Kontrola eksplozymetrów w bud. H-101	Termin wzorcowania: 08-luty-2024
-Kontrola eksplozymetrów w bud. E-92 Invento	Termin wzorcowania: 24-sierpień-2023
-H-115	Termin wzorcowania: 26-październik-2023
-C-98	Termin wzorcowania: 31-styczeń-2024
-E182 - Inne Czujniki	Termin wzorcowania: 22-luty-2024
-E182 - Czujniki OLDHAM	Termin wzorcowania: 22-luty-2024
-E-182 Czujniki na Etylen GAZEX	Termin wzorcowania: 22-luty-2024
-Kontrola sygnalizatorów octanu winylu w bud. F - 170. Czujniki GAZEX	Termin wzorcowania: 26-maj-2022
-Kontrola eksplozymetrów w bud. G-175. Kwas Akrylowy	Termin wzorcowania: 21-luty-2024
-Kontrola eksplozymetrów w bud. G-175 - Czujniki OLDHAM	Termin wzorcowania: 21-luty-2024
-Kontrola eksplozymetrów w bud. F-170. Czujniki OLDHAM	Termin wzorcowania: 21-luty-2024
-SSBR	Termin wzorcowania: 31-styczeń-2024
-Kontrola eksplozymetrów w bud. F - 142	Termin wzorcowania: 31-styczeń-2024
-Kontrola eksplozymetrów w bud. F-147	Termin wzorcowania: 31-styczeń-2024
-Kontrola eksplozymetrów w bud. D - 146	Termin wzorcowania: 31-styczeń-2024
-Kontrola sygnalizatorów w bud. E - 156	Termin wzorcowania: 31-styczeń-2024
-Kontrola sygnalizatorów w bud. E - 158	Termin wzorcowania: 31-styczeń-2024
-Kontrola eksplozymetrów w bud. E - 146	Termin wzorcowania: 31-styczeń-2024
-Kontrola eksplozymetrów w bud. D-158. Czujniki Honeywella	Termin wzorcowania: 31-styczeń-2024
-Kontrola eksplozymetrów w bud. E - 142	Termin wzorcowania: 31-styczeń-2024
-Kontrola eksplozymetrów w bud. CMB   S - 191. Centralka Tochpoint Pro.	Termin wzorcowania: 31-styczeń-2024
-Kontrola eksplozymetrów w bud. CMB   S - 191. Centralka SensePoint	Termin wzorcowania: 31-styczeń-2024
-Kontrola eksplozymetrów w bud. E - 145	Termin wzorcowania: 28-styczeń-2024
+                                  SSBR- Akumulatorownia w rozdzielni robót	Termin wzorcowania: 27-maj-2023
+                                                                      Agro	Termin wzorcowania: 19-lipiec-2023
+                  Miejsko - Przemysłowa Oczyszczalnia Ścieków w Oświęcimiu	Termin wzorcowania: 24-czerwiec-2023
+                    Kontrola sygnalizatorów Gazex w budynku A-117 ( SD-4 )	Termin wzorcowania: 29-październik-2023
+                    Kontrola sygnalizatorów Gazex w budynku A-117 ( SD-5 )	Termin wzorcowania: 29-październik-2023
+                    Kontrola sygnalizatorów Gazex w budynku A-118 ( SD-8 )	Termin wzorcowania: 18-czerwiec-2023
+                                                     LNG Instalacja, A-110	Termin wzorcowania: 21-październik-2023
+                                                            Kocioł 4,A-110	Termin wzorcowania: 29-kwiecień-2023
+                                                           Kocioł 9, A-110	Termin wzorcowania: 17-styczeń-2024
+                                                               Agro, Nonan	Termin wzorcowania: 31-styczeń-2024
+                                                 Agro, Laboratorium, Wodór	Termin wzorcowania: 31-styczeń-2024
+                                            Kocioł 1-Piec Fluidalny, A-110	Termin wzorcowania: 15-grudzień-2023
+                                                                   Brentag	Termin wzorcowania: 19-lipiec-2023
+                                                                Bystrowice	Termin wzorcowania: 17-wrzesień-2024
+  Kontrola sygnalizatora Bias Składowisko Odpadów Komunalnych w Oświęcimiu	Termin wzorcowania: 22-wrzesień-2023
+                                                                        DP	Termin wzorcowania: 20-październik-2023
+       Kontrola eksplozymetrów w bud. E - 99. Czujniki na piecu metanowym.	Termin wzorcowania: 09-listopad-2023
+                                       Kontrola eksplozymetrów w bud. E-99	Termin wzorcowania: 09-listopad-2023
+                                      Kontrola eksplozymetrów w bud. C-116	Termin wzorcowania: 09-listopad-2023
+                                      Kontrola eksplozymetrów w bud. C-110	Termin wzorcowania: 22-listopad-2023
+                                         Kontrola eksplozymetrów C-110 RTO	Termin wzorcowania: 22-listopad-2023
+                                     Kontrola eksplozymetrów w bud. G - 99	Termin wzorcowania: 27-styczeń-2024
+                                    Kontrola eksplozymetrów w bud. G - 120	Termin wzorcowania: 27-styczeń-2024
+                                    Kontrola eksplozymetrów w bud. A - 133	Termin wzorcowania: 27-styczeń-2024
+                                    Kontrola eksplozymetrów w bud. F - 120	Termin wzorcowania: 27-styczeń-2024
+                            Kontrola eksplozymetrów w bud. G – 107 / G-109	Termin wzorcowania: 27-styczeń-2024
+                                      Kontrola eksplozymetrów w bud. H-101	Termin wzorcowania: 08-luty-2024
+                               Kontrola eksplozymetrów w bud. E-92 Invento	Termin wzorcowania: 24-sierpień-2023
+                                                                     H-115	Termin wzorcowania: 26-październik-2023
+                                                                      C-98	Termin wzorcowania: 31-styczeń-2024
+                                                      E182 - Inne Czujniki	Termin wzorcowania: 22-luty-2024
+                                                    E182 - Czujniki OLDHAM	Termin wzorcowania: 22-luty-2024
+                                            E-182 Czujniki na Etylen GAZEX	Termin wzorcowania: 22-luty-2024
+      Kontrola sygnalizatorów octanu winylu w bud. F - 170. Czujniki GAZEX	Termin wzorcowania: 26-maj-2022
+                       Kontrola eksplozymetrów w bud. G-175. Kwas Akrylowy	Termin wzorcowania: 21-luty-2024
+                    Kontrola eksplozymetrów w bud. G-175 - Czujniki OLDHAM	Termin wzorcowania: 21-luty-2024
+                     Kontrola eksplozymetrów w bud. F-170. Czujniki OLDHAM	Termin wzorcowania: 21-luty-2024
+                                                                      SSBR	Termin wzorcowania: 31-styczeń-2024
+                                    Kontrola eksplozymetrów w bud. F - 142	Termin wzorcowania: 31-styczeń-2024
+                                      Kontrola eksplozymetrów w bud. F-147	Termin wzorcowania: 31-styczeń-2024
+                                    Kontrola eksplozymetrów w bud. D - 146	Termin wzorcowania: 31-styczeń-2024
+                                    Kontrola sygnalizatorów w bud. E - 156	Termin wzorcowania: 31-styczeń-2024
+                                    Kontrola sygnalizatorów w bud. E - 158	Termin wzorcowania: 31-styczeń-2024
+                                    Kontrola eksplozymetrów w bud. E - 146	Termin wzorcowania: 31-styczeń-2024
+                 Kontrola eksplozymetrów w bud. D-158. Czujniki Honeywella	Termin wzorcowania: 31-styczeń-2024
+                                    Kontrola eksplozymetrów w bud. E - 142	Termin wzorcowania: 31-styczeń-2024
+    Kontrola eksplozymetrów w bud. CMB   S - 191. Centralka Tochpoint Pro.	Termin wzorcowania: 31-styczeń-2024
+        Kontrola eksplozymetrów w bud. CMB   S - 191. Centralka SensePoint	Termin wzorcowania: 31-styczeń-2024
+                                    Kontrola eksplozymetrów w bud. E - 145	Termin wzorcowania: 28-styczeń-2024
 Kontrola eksplozymetrów w bud. E-143. Nowe Kompresory. Czujniki Honeywella.	Termin wzorcowania: 28-styczeń-2024
-Kontrola eksplozymetrów w bud. F - 101	Termin wzorcowania: 31-styczeń-2024
-Kontrola eksplozymetrów w bud. F-109. Tace.	Termin wzorcowania: 31-styczeń-2024
-Kontrola eksplozymetrów w bud. F - 100	Termin wzorcowania: 27-styczeń-2024
-E-121	Termin wzorcowania: 06-sierpień-2023
-Rail-Synthos	Termin wzorcowania: 05-wrzesień-2023
+                                    Kontrola eksplozymetrów w bud. F - 101	Termin wzorcowania: 31-styczeń-2024
+                               Kontrola eksplozymetrów w bud. F-109. Tace.	Termin wzorcowania: 31-styczeń-2024
+                                    Kontrola eksplozymetrów w bud. F - 100	Termin wzorcowania: 27-styczeń-2024
+                                                                     E-121	Termin wzorcowania: 06-sierpień-2023
+                                                              Rail-Synthos	Termin wzorcowania: 05-wrzesień-2023
+                                                          Polifarb Cieszyn	Termin wzorcowania: 16-listopad-2023

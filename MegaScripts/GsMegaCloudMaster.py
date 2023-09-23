@@ -1,6 +1,9 @@
-﻿"""
-    Moduł GsMegaCloudMaster do obsługi chmury MEGA
-"""
+﻿
+#  Copyright (c) Grzegorz Sołtysik
+#  Nazwa projektu: MegaScripts
+#  Nazwa pliku: GsMegaCloudMaster.py
+#  Data: 09.09.2023, 09:01
+
 import os, locale
 from datetime import datetime
 

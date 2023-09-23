@@ -1,13 +1,12 @@
-# import configparser
-# import locale
-# import fileinput
-import os
-# from datetime import datetime
-from enum import IntEnum, auto
-# from pathlib import Path
-import fpdf
 
-# from fpdf import FPDF
+#  Copyright (c) Grzegorz Sołtysik
+#  Nazwa projektu: MyBiblePyClass
+#  Nazwa pliku: MyBiblePyClass.py
+#  Data: 09.09.2023, 08:59
+
+import os
+from enum import IntEnum, auto
+import fpdf
 
 MAX_BOOKS: int = 73  # Maksymalna ilość ksiąg + 1
 
