@@ -51,8 +51,8 @@ def getvalueini(pathini: str, sectionini: str, valueini: str, defaultvalue: str)
 def archiweproject(pathsourcedir: str, typearch: TypeArch = TypeArch.en7Zip):
     """
     OPIS: Funkcja archiwizuje projekt z ścieżki dostępu "pathsourcedir"
-    :param pathsourcedir: str - Ścieżka dostępu do głównego katalogu projektu
-    :param typearch:TypeArch - Domyślny typ archiwizacji
+    :param pathsourcedir: str-Ścieżka dostępu do głównego katalogu projektu
+    :param typearch:TypeArch-Domyślny typ archiwizacji
     :return: pass
     """
     # Stworzenie prostej tekstowej winiety
@@ -118,4 +118,4 @@ def archiweproject(pathsourcedir: str, typearch: TypeArch = TypeArch.en7Zip):
     os.chdir(nameprojectarchiwe)  # Aktualnym katalogiem jest katalog anarchism
     os.system("cls")  # Wyczyszczenie konsoli
     os.system("dir")
-    # os.system("pause") # Czekanie na naciśnięcie dowolnego klawisza by zamknąć konsole
+    # os.system("pause") # Czekanie na naciśnięcie dowolnego klawisza, by zamknąć konsole

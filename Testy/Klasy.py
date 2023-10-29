@@ -1,6 +1,8 @@
 class Base:
-  def metoda_base(self):
+  @staticmethod
+  def metoda_base():
     print("Klasa Base")
+
 class testclass(Base):
   def __init__(self, _a: int, _b: int):
     self.a: int = _a
