@@ -34,7 +34,8 @@ ListNames = ["GsDebugClass.h", "Headers.h",
              "uSelectVersWindow.cpp", "uSelectVersWindow.dfm", "uSelectVersWindow.h",
              "uSendingMailWindow.cpp", "uSendingMailWindow.dfm", "uSendingMailWindow.h",
              "uSetupsWindow.cpp", "uSetupsWindow.dfm", "uSetupsWindow.h",
-             "uViewAllResourcesWindow.cpp", "uViewAllResourcesWindow.dfm", "uViewAllResourcesWindow.h"]
+             # "uViewAllResourcesWindow.cpp", "uViewAllResourcesWindow.dfm", "uViewAllResourcesWindow.h"]
+             "uAllMultimediaView.cpp", "uAllMultimediaView.h", "uAllMultimediaView.dfm"]
 # Nazwy katalogów dodatkowych modułów
 ListModules = ["GsComponents", "MyBibleLibrary"]
 
