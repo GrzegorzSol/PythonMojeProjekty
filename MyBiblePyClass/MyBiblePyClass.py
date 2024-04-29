@@ -2,7 +2,7 @@
 #  Copyright (c) Grzegorz Sołtysik
 #  Nazwa projektu: MyBiblePyClass
 #  Nazwa pliku: MyBiblePyClass.py
-#  Data: 09.09.2023, 08:59
+#  Data: 28.04.2024, 17:13
 
 import os
 from enum import IntEnum, auto

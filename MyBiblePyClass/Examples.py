@@ -1,7 +1,7 @@
 #  Copyright (c) Grzegorz Sołtysik
 #  Nazwa projektu: MyBiblePyClass
 #  Nazwa pliku: Examples.py
-#  Data: 09.09.2023, 08:59
+#  Data: 28.04.2024, 17:13
 
 from MyBiblePyClass import MyBiblePyClass  # , EnumDecodeListText
 
