@@ -1,4 +1,3 @@
-
 #  Copyright (c) Grzegorz Sołtysik
 #  Nazwa projektu: MyBiblePyClass
 #  Nazwa pliku: MyBiblePyClass.py
@@ -127,7 +126,7 @@ class ItemTrans:
 
     def __readallbooks__(self):  # Metoda prywatna
         """
-        @return: Brak
+        :return: Brak
         """
         #  Odczyt poszczególnych ksiąg
         strtext = self.__fileh__.readline().strip("\n")
@@ -145,7 +144,7 @@ class MyBiblePyClass:
     # Konstruktor
     def __init__(self, _pathtrdir: str):
         """
-        @param _pathtrdir: Ścieżka dostępu do katalogu z tłumaczeniami
+        :param _pathtrdir: Ścieżka dostępu do katalogu z tłumaczeniami
         """
         # Private
         self.__version__: str = "v0.3.5678"
@@ -162,7 +161,7 @@ class MyBiblePyClass:
 
     def getversion(self):
         """
-        @return: Metoda zwraca prywatne pole wersji biblioteki
+        :return: Metoda zwraca prywatne pole wersji biblioteki
         """
         return self.__version__
 
@@ -171,10 +170,10 @@ class MyBiblePyClass:
 
     def readtextall(self, _ibook: int, _ichapt: int = 1, _iver: int = 1) -> []:
         """
-        @param _ibook: Numer księgi
-        @param _ichapt: Numer rozdziału, domyślnie 1
-        @param _iver: Numer wersetu, domyślnie 1
-        @return: Metoda zwraca listę tekstów biblijnych wszystkich dostępnych tłumaczeń
+        :param _ibook: Numer księgi
+        :param _ichapt: Numer rozdziału, domyślnie 1
+        :param _iver: Numer wersetu, domyślnie 1
+        :return: Metoda zwraca listę tekstów biblijnych wszystkich dostępnych tłumaczeń
         """
         resultlist = []
 
@@ -190,11 +189,11 @@ class MyBiblePyClass:
 
     def __readtext__(self, _itrans: int, _ibook: int, _ichapt: int = 1, _ivers: int = 1) -> []:
         """
-        @param _itrans: Numer tłumaczenia
-        @param _ibook: Numer księgi
-        @param _ichapt: Numer rozdziału, domyślnie 1
-        @param _ivers: Numer wersetu, domyślnie 1
-        @return: Metoda zwraca tekst biblijny, określony w argumentach metody
+        :param _itrans: Numer tłumaczenia
+        :param _ibook: Numer księgi
+        :param _ichapt: Numer rozdziału, domyślnie 1
+        :param _ivers: Numer wersetu, domyślnie 1
+        :return: Metoda zwraca tekst biblijny, określony w argumentach metody
         """
         if _itrans >= len(self.__filenames__) or _ibook == 0 or _ichapt == 0 or _ivers == 0:
             return ""  # Jeśli przekroczono zakresy
@@ -229,10 +228,10 @@ class MyBiblePyClass:
 
     def __createpdfalltext__(self, _ibook: int, _ichapt: int = 1, _iver: int = 1):
         """
-        @param _ibook: Numer księgi
-        @param _ichapt: Numer rozdziału
-        @param _iver: Numer wersetu
-        @return: Brak
+        :param _ibook: Numer księgi
+        :param _ichapt: Numer rozdziału
+        :param _iver: Numer wersetu
+        :return: Brak
         """
         setfontsize = 16
         myimage: str = "Tora.png"
