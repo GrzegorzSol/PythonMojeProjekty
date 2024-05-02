@@ -13,6 +13,6 @@ a = GsPyMyChart(fInTableRef=fTable, fInTableMeas=fTableM, strPathPDF="Liniowy_wy
 b = GsPyMyChartBox(fInTableRef=fTable, fInTableMeas=fTableM, strPathPDF="Słupkowy_wymiarowany.pdf",
 						strTitle="Wykres słupkowy błędów dla aparatu:", iHeight=400, iWidth=300, iTop=100, iLeft=100)
 
-c = GsPyMyChartBox(fInTableRef=fTable, fInTableMeas=fTableM, strPathPDF="Słupkowy_maksymalny.pdf")
+c = GsPyMyChartBox(fInTableRef=fTable, fInTableMeas=fTableM, strTitle="Test", strPathPDF="Słupkowy_maksymalny.pdf", iHeight=400)
 
 d = GsPyMyChart(fInTableRef=fTable, fInTableMeas=fTableM, strTitle="Wykres słupkowy błędów dla aparatu:", strPathPDF="Liniowy_maksymalny.pdf")

@@ -67,13 +67,17 @@ class GsPyMyChartBase:
         fDefaultWidth: float = 8.27 * 72  # Domyślna szerokość kartki
         fDefaultHeight: float = 11.69 * 72  # Domyślna wysokość kartki
         # Warunek wysokości i szerokości
-        if self._iDefHeight == 0 or self._iDefWidth == 0:
+        if self._iDefHeight == 0:
             # Wykres na całą kartkę
             self._fMaxHeight = fDefaultHeight
-            self._fMaxWidth = fDefaultWidth
         else:
             # Wysokość użytkownika
             self._fMaxHeight = self._iDefHeight
+
+        if self._iDefWidth == 0:
+            self._fMaxWidth = fDefaultWidth
+        else:
+            # Szerokość użytkownika
             self._fMaxWidth = self._iDefWidth
 
         # Pilnowanie by wymiary wprowadzone przez użytkownika nie były za małe.
