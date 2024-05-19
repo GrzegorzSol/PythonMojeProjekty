@@ -1,4 +1,4 @@
-#  Copyright (c) Grzegorz Sołtysik 05.05.2024, 06:08
+#  Copyright (c) Grzegorz Sołtysik 05.05.2024, 18:44
 #  Nazwa projektu: GsPyChartClass
 #  Nazwa pliku: GsPyMyChart.py
 
@@ -77,6 +77,7 @@ class GsPyMyChartBase:
 
         fDeltaRef: float = self._fTableRef[self._cuiCount - 1] - self._fTableRef[0]
         fDeltaMeas: float = self._fTableMeas[self._cuiCount - 1] - self._fTableMeas[0]
+
         # Wybranie większej delty
         if fDeltaRef >= fDeltaMeas:
             self._fDelta: float = fDeltaRef
@@ -86,8 +87,10 @@ class GsPyMyChartBase:
         # Wynajdywanie najmniejszej wartości z obu tablic
         if self._fTableRef[0] <= self._fTableMeas[0]:
             self._fYMin: float = self._fTableRef[0]
+
         elif self._fTableRef[0] > self._fTableMeas[0]:
             self._fYMin: float = self._fTableMeas[0]
+
         # Potrzebne obliczenia
         self.__calculate()
         # Tworzenie dokumentu PDF
@@ -175,10 +178,16 @@ class GsPyMyChartBase:
         # Rysowanie osi X i Y
         self._pdf.set_draw_color(0, 0, 0)
         self._pdf.set_line_width(1.5)
+        # Rysowanie osi Y
         self._pdf.polyline([(self._RectDrawBaseF.fLeft, self._RectDrawBaseF.fTop),
                         (self._RectDrawBaseF.fLeft, self._RectDrawBaseF.fBottom)])
-        self._pdf.polyline([(self._RectDrawBaseF.fLeft, self._fYReference_0),
-                            (self._RectDrawBaseF.fRight, self._fYReference_0)])
+
+        # Rysowanie osi 'X'
+        # Oś 'X' jest rysowana tylko wtedy, kiedy jakakolwiek najmniejsza wartość pomiarów
+        # jest mniejsza lub równa '0'.
+        if self._fYMin <= 0:
+            self._pdf.polyline([(self._RectDrawBaseF.fLeft, self._fYReference_0),
+                                (self._RectDrawBaseF.fRight, self._fYReference_0)])
 
     # Rysowanie tytułu
     def __paint_title(self):
@@ -283,9 +292,9 @@ class GsPyMyChart(GsPyMyChartBase):
 
 
 """
---------------------------- Klasa GsPyMyChartBox ---------------------------
+--------------------------- Klasa GsPyMyChartBar ---------------------------
 """
-class GsPyMyChartBox(GsPyMyChartBase):
+class GsPyMyChartBar(GsPyMyChartBase):
     def __init__(self, fInTableRef: list, fInTableMeas: list, strPathPDF: str, strTitle: str = "", iLeft: int = 0, iTop: int = 0, iHeight: int = 0, iWidth: int = 0):
         """
         :param fInTableRef: Tablica wyników referencyjnych.
@@ -328,12 +337,16 @@ class GsPyMyChartBox(GsPyMyChartBase):
             else:
                 self._pdf.text(self._PointFMeas[i][0] + fOffSetTextMaes, self._PointFMeas[i][1] + fVertTextOffsetD, strText)
 
-
     def __createpdf(self):
         """
         :return: Brak.
         """
         fWidthBar: float = self._fX / 3
+        # Jeśli KAŻDY wykres zaczyna się powyżej zera, czyli najmniejsza wartość z obu serii pomiarów jest większa niż '0'
+        # wartość odniesienia 'Y' jest równa minimalnej dolnej współrzędnej 'Y', czyli self._RectDrawBaseF.fBottom
+        if self._fYMin > 0:
+            self._fYReference_0 = self._RectDrawBaseF.fBottom
+
         for i in range(self._cuiCount):
             fHeightBarRef: float = self._fYReference_0 - self._PointFRef[i][1]
             fAbsHeightBarRef: float = abs(fHeightBarRef)

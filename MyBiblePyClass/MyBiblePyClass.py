@@ -5,6 +5,7 @@
 
 import os
 from enum import IntEnum, auto
+
 import fpdf
 
 MAX_BOOKS: int = 73  # Maksymalna ilość ksiąg + 1

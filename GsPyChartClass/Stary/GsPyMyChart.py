@@ -1,4 +1,4 @@
-#  Copyright (c) Grzegorz Sołtysik 05.05.2024, 06:08
+#  Copyright (c) Grzegorz Sołtysik 05.05.2024, 18:44
 #  Nazwa projektu: GsPyChartClass
 #  Nazwa pliku: GsPyMyChart.py
 
